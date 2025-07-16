@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-nav-text: #fef3df;
+  --font-georgia: Georgia;
+  --color-nav-hover: #ca7821;
+  --color-order-hover: #c68a22;
+  --color-title-text: #764d3d;
+  --color-hover-text: #eab85f;
+}
+
+@layer components {
+  .bg-repeating-stripes {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0px,
+      rgba(245, 245, 245, 1) 20px,
+      transparent 3px,
+      transparent 160px
+    );
+  }
+  .bg-repeating-stripes-brown {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(80, 40, 20, 0.5) 0px,
+      rgba(80, 40, 20, 0.5) 20px,
+      transparent 3px,
+      transparent 160px
+    );
+  }
+  .yellow-overlay {
+    background-image: linear-gradient(
+      180deg,
+      rgba(247, 247, 247, 0.6) 0%,
+      rgba(254, 246, 233, 0.6) 50%,
+      rgba(255, 239, 211, 0.6) 100%
+    );
+  }
+  .team-yellow-overlay {
+    background-image: linear-gradient(
+      180deg,
+      rgba(247, 247, 247, 1) 0%,
+      rgba(254, 246, 233, 1) 50%,
+      rgba(255, 239, 211, 1) 100%
+    );
+  }
+  .section-yellow-overlay {
+    background-image: linear-gradient(180deg, rgba(255, 239, 211, 0.6) 100%);
+  }
+  .brown-overlay {
+    background: rgba(118, 77, 61, 0.75);
+  }
+}
+
+@keyframes smoothSwing {
+  from {
+    transform: rotate(-20deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+.OpenSign {
+  transform-origin: top center;
+  animation: smoothSwing 2s ease-in-out infinite alternate;
+}
