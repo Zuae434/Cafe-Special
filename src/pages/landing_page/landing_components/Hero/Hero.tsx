@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import coffeeCup from "./CoffeCup.svg";
 import CTAButton from "../../../components/CTAButton";
 
@@ -19,8 +20,12 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex gap-8 mt-[30px] text-3xl">
-            <CTAButton title="Order Now" color />
-            <CTAButton title="Locations" color={false} />
+            <Link to="/Menu">
+              <CTAButton title="Order Now" color />
+            </Link>
+            <Link to="/Locations">
+              <CTAButton title="Locations" color={false} />
+            </Link>
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import brownCoffee from "../ContentBar/BrownCoffeeCup.svg";
 import CTAButton from "../../../components/CTAButton";
 import SarahYoung from "./TeamMembers/xIM0XY.png";
@@ -54,9 +55,12 @@ const MeetTheTeam = () => {
           src={brownCoffee}
           alt="Brown Coffee Cup"
         />
-        <div className="flex flex-row items-center justify-center mt-[50px] mb-[50px] [&_button]:text-lg">
+        <Link
+          to="/About"
+          className="flex flex-row items-center justify-center mt-[50px] mb-[50px] [&_button]:text-lg"
+        >
           <CTAButton title="Learn more about the team" color />
-        </div>
+        </Link>
         <img
           className="transform scale-x-[-1] relative left-[-50px]"
           src={brownCoffee}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FiftyOff from "./EventsImages/50Off.png";
 import AllWelcome from "./EventsImages/AllWelcome.png";
 import OpenMic from "./EventsImages/OpenMic.png";
@@ -16,9 +17,11 @@ const CoffeeEvents = () => {
         <div className="container mx-auto flex flex-row flex-start mt-10">
           <div className="flex flex-col">
             <img src={OpenMic} alt="Open Mic" className="h-[450px] w-[350px]" />
-            <button className="mt-2 text-[#8F7D5E] cursor-pointer text-xl font-bold self-end hover:text-hover-text transition-all ease-in-out duration-150">
-              View All Events
-            </button>
+            <Link to="/Events" className="self-end">
+              <button className="mt-2 text-[#8F7D5E] cursor-pointer text-xl font-bold self-end hover:text-hover-text transition-all ease-in-out duration-150">
+                View All Events
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col ml-10 mt-5">
             <h2 className="font-georgia text-2xl text-[#4A2C20] font-bold mb-5">

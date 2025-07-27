@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CTAButton from "../../../components/CTAButton";
 import brownCoffee from "../ContentBar/BrownCoffeeCup.svg";
 import LandingMenuItem from "../../landing_components/LandingMenuItem";
@@ -30,7 +31,9 @@ const BestSellers = () => {
           />
         </div>
         <div className="flex justify-center mt-[75px]">
-          <CTAButton title="See Full Menu" color />
+          <Link to="/Menu">
+            <CTAButton title="See Full Menu" color />
+          </Link>
         </div>
       </div>
       <div className="flex flex-row justify-between">

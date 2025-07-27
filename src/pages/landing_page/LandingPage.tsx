@@ -10,6 +10,7 @@ import CoffeeEvents from "./landing_components/CoffeeEvents/Events";
 import LandingContact from "./landing_components/Contact/LandingContact";
 import NewsLetter from "./landing_components/NewsLetter/NewsLetter";
 import BackToTop from "../components/BackToTop";
+import AnimatedContentBar from "./landing_components/ContentBar/AnimatedContentBar";
 
 const LandingPage = () => {
   return (
@@ -33,11 +34,7 @@ const LandingPage = () => {
         <BestSellers />
         <MeetTheTeam />
         <PhotoGallery />
-        <ContentBar
-          content={Array.from({ length: 10 }, (_, i) => (
-            <img src={CoffeeMug} alt="Coffee Mug" width="25px" key={i} />
-          ))}
-        />
+        <AnimatedContentBar />
         <CoffeeEvents />
         <LandingContact />
         <NewsLetter />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Image1 from "./PhotoGalleryImages/Image1.png";
 import Image2 from "./PhotoGalleryImages/Image2.png";
 import Image3 from "./PhotoGalleryImages/Image3.png";
@@ -22,9 +23,11 @@ const PhotoGallery = () => {
           <div className="flex flex-col">
             <img src={Image3} alt="Image 3" className="h-[200px] w-[200px]" />
             <img src={Image4} alt="Image 4" className="h-[200px] w-[200px]" />
-            <button className="mt-2 text-[#8F7D5E] cursor-pointer text-xl font-bold self-end hover:text-hover-text transition-all ease-in-out duration-150">
-              View All Photos
-            </button>
+            <Link to="/PhotoGallery" className="self-end">
+              <button className="mt-2 text-[#8F7D5E] cursor-pointer text-xl font-bold hover:text-hover-text transition-all ease-in-out duration-150">
+                View All Photos
+              </button>
+            </Link>
           </div>
           <div className="flex flex-col ml-10 mt-5">
             <h2 className="font-georgia text-2xl text-[#4A2C20] font-bold mb-5">

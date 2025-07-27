@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import TeamMember1 from "./TeamMembers/TeamMember1.png";
 import TeamMember2 from "./TeamMembers/TeamMember2.png";
 import TeamMember3 from "./TeamMembers/TeamMember3.png";
@@ -35,11 +37,12 @@ const DraggableTeamGallery = () => {
         </div>
       ))}
 
-      {/* your call-to-action button at the end */}
       <div className="flex-none flex items-center">
-        <button className="px-4 py-2 bg-[#764D3D] text-white rounded-full cursor-pointer hover:bg-[#5a3b2c] transition duration-300 ml-4">
-          Learn more about our team
-        </button>
+        <Link to="/About">
+          <button className="px-4 py-2 bg-[#764D3D] text-white rounded-full cursor-pointer hover:bg-[#5a3b2c] transition duration-300 ml-4">
+            Learn more about our team
+          </button>
+        </Link>
       </div>
     </div>
   );

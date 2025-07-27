@@ -1,4 +1,5 @@
 import "../../App.css";
+import { Link } from "react-router-dom";
 
 const logo = (
   <svg
@@ -65,20 +66,30 @@ const logo = (
 
 const Header = () => {
   return (
-    <div className="header-container flex flex-row items-center max-w-lvw min-h-[75px] bg-[#F3B54A]/80 justify-around text-nav-text font-georgia text-lg z-10">
-      <button className="hover:cursor-pointer">{logo}</button>
-      <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-        OUR STORY
-      </button>
-      <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-        LOCATIONS
-      </button>
-      <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-        CONTACT
-      </button>
-      <button className="min-w-[175px] min-h-[35px] bg-nav-text text-[#D29429] rounded-4xl font-sans hover:text-nav-text hover:bg-order-hover transition-all duration-150 ease-in cursor-pointer">
-        ORDER NOW
-      </button>
+    <div className="header-container sticky flex flex-row items-center max-w-lvw min-h-[75px] bg-[#F3B54A]/80 justify-around text-nav-text font-georgia text-lg z-10">
+      <Link to="/">
+        <button className="hover:cursor-pointer">{logo}</button>
+      </Link>
+      <Link to="/Story">
+        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
+          OUR STORY
+        </button>
+      </Link>
+      <Link to="/Locations">
+        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
+          LOCATIONS
+        </button>
+      </Link>
+      <Link to="/Contact">
+        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
+          CONTACT
+        </button>
+      </Link>
+      <Link to="/Menu">
+        <button className="min-w-[175px] min-h-[35px] bg-nav-text text-[#D29429] rounded-4xl font-sans hover:text-nav-text hover:bg-order-hover transition-all duration-150 ease-in cursor-pointer">
+          ORDER NOW
+        </button>
+      </Link>
     </div>
   );
 };
