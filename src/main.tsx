@@ -11,7 +11,7 @@ import Events from "./pages/events_page/events.tsx";
 import Contact from "./pages/contact_page/Contact.tsx";
 import Menu from "./pages/menu_page/Menu.tsx";
 import SignLogin from "./pages/sign-login_page/Sign-Login.tsx";
-import EmptyCart from "./pages/empty_cart_page/EmptyCart.tsx";
+import EmptyCart from "./pages/cart_page/Cart.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
