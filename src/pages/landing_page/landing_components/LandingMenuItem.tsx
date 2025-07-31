@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PlusButton = (
   <svg
@@ -46,6 +48,9 @@ const LandingMenuItem: React.FC<LandingMenuItemProps> = ({
   image,
   price,
 }) => {
+  const handleAddToCart = () => {
+    toast.success("Successfully added to cart!");
+  };
   return (
     <>
       <div className="group relative rounded-[30px] border-4 border-[#BEBABA] w-[275px] h-[350px] text-[#7D7A7A] hover:border-[#F7FBB7] hover:text-[#F7F7F7] hover:bg-[linear-gradient(151deg,_#FBFFBB_2.67%,_#9C9F72_97.33%)] transition-all duration-150 ease-in-out">
@@ -55,10 +60,14 @@ const LandingMenuItem: React.FC<LandingMenuItemProps> = ({
           <h1 className="hidden group-hover:block mt-2 text-center text-2xl">
             {price}
           </h1>
-          <button className="hidden group-hover:block mt-2 text-center">
+          <button
+            onClick={handleAddToCart}
+            className="hidden group-hover:block mt-2 text-center hover:cursor-pointer"
+          >
             {PlusButton}
           </button>
         </div>
+        <ToastContainer position="top-center" />
       </div>
     </>
   );

@@ -9,7 +9,6 @@ type MenuCardProps = {
 
 const MenuCard: React.FC<MenuCardProps> = ({ image, title, subtitle }) => {
   const handleAddToCart = () => {
-    console.log("Added to cart:", title);
     toast.success("Successfully added to cart!");
   };
   return (
