@@ -7,6 +7,8 @@ import {
 } from "./cartIcons";
 import { useState, useEffect } from "react";
 import TipButton from "./TipButton";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const tipAmountMap: Record<string, string> = {
   "5": "$1.90",
@@ -23,6 +25,9 @@ const totalAmountMap: Record<string, string> = {
 };
 
 const Checkout = () => {
+  const handleCheckoutError = () => {
+    toast.error("Failed to checkout!");
+  };
   const [isCurbside, setIsCurbSide] = useState(false);
   const [selectedTip, setSelectedTip] = useState<string | null>(null);
 
@@ -45,10 +50,10 @@ const Checkout = () => {
       if (resp.ok && data.checkoutUrl) {
         setCheckoutUrl(data.checkoutUrl);
       } else {
-        console.error("Checkout API error:", data);
+        handleCheckoutError();
       }
-    } catch (err) {
-      console.error("Network error:", err);
+    } catch {
+      handleCheckoutError();
     } finally {
       setIsSubmitting(false);
     }
@@ -158,6 +163,7 @@ const Checkout = () => {
       >
         {isSubmitting ? "Processing..." : "Checkout"}
       </button>
+      <ToastContainer position="top-center" />
     </>
   );
 };
