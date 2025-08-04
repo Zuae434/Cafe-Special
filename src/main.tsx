@@ -12,23 +12,27 @@ import Contact from "./pages/contact_page/Contact.tsx";
 import Menu from "./pages/menu_page/Menu.tsx";
 import SignLogin from "./pages/sign-login_page/Sign-Login.tsx";
 import EmptyCart from "./pages/cart_page/Cart.tsx";
+import { CartProvider } from "./pages/cart_page/useCart";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Story" element={<Story />} />
-        <Route path="/Locations" element={<Locations />} />
-        <Route path="/PhotoGallery" element={<PhotoGallery />} />
-        <Route path="/Events" element={<Events />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/Menu" element={<Menu />} />
-        <Route path="/Signup" element={<SignLogin />} />
-        <Route path="/Cart" element={<EmptyCart />} />
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>
+    <CartProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Story" element={<Story />} />
+          <Route path="/Locations" element={<Locations />} />
+          <Route path="/PhotoGallery" element={<PhotoGallery />} />
+          <Route path="/Events" element={<Events />} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="/Menu" element={<Menu />} />
+          <Route path="/Signup" element={<SignLogin />} />
+          <Route path="/Cart" element={<EmptyCart />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
+  </StrictMode>,
 );
+
