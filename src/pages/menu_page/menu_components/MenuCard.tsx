@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useCart from "../../cart_page/useCart";
 
 type MenuCardProps = {
   image: string;
@@ -8,7 +9,9 @@ type MenuCardProps = {
 };
 
 const MenuCard: React.FC<MenuCardProps> = ({ image, title, subtitle }) => {
+  const { addToCart } = useCart();
   const handleAddToCart = () => {
+    addToCart({ id: title, name: title, price: 6, image });
     toast.success("Successfully added to cart!");
   };
   return (
