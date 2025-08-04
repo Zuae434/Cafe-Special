@@ -4,7 +4,7 @@ import useCart from "./useCart";
 import Bin from "./Bin.png";
 
 const CartItems = () => {
-  const { cart, addToCart, removeFromCart, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, removeItem, clearCart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
 
   if (cart.length === 0) {
@@ -81,14 +81,22 @@ const CartItems = () => {
                 src={Bin}
                 alt="Bin"
                 className="h-[21px] w-[21px] hover:cursor-pointer"
-                onClick={() => removeFromCart(item.id)}
+                onClick={() => {
+                  if (window.confirm("Remove this item from the cart?")) {
+                    removeItem(item.id);
+                  }
+                }}
               />
             </div>
           </div>
         </div>
       ))}
       <button
-        onClick={clearCart}
+        onClick={() => {
+          if (window.confirm("Clear all items from the cart?")) {
+            clearCart();
+          }
+        }}
         className="w-full py-3 border border-[#050505] rounded-[10px] text-center text-md font-sans tracking-wider mt-10"
       >
         Clear Cart
