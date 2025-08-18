@@ -9,19 +9,18 @@ import { useState, useEffect } from "react";
 import TipButton from "./TipButton";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useCart from "./useCart";
 
-const tipAmountMap: Record<string, string> = {
-  "5": "$1.90",
-  "10": "$3.80",
-  "15": "$5.70",
-  none: "$0.00",
-};
+interface StoredItem {
+  id: string;
+  image: string;
+  name: string;
+  price: number;
+  qty: string;
+}
 
-const totalAmountMap: Record<string, string> = {
-  "5": "$7.90",
-  "10": "$9.80",
-  "15": "$11.70",
-  none: "$6.00",
+const formatCurrency = (amount: number) => {
+  return `$${amount.toFixed(2)}`;
 };
 
 const Checkout = () => {
@@ -29,10 +28,15 @@ const Checkout = () => {
     toast.error("Failed to checkout!");
   };
   const [isCurbside, setIsCurbSide] = useState(false);
-  const [selectedTip, setSelectedTip] = useState<string | null>(null);
+  const [selectedTip, setSelectedTip] = useState(0);
 
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { cart } = useCart();
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const tipAmount = (subtotal * selectedTip) / 100;
+  const estimatedTotal = subtotal + tipAmount;
 
   useEffect(() => {
     if (checkoutUrl) {
@@ -42,13 +46,30 @@ const Checkout = () => {
 
   const handleCheckout = async () => {
     setIsSubmitting(true);
+
     try {
+      const stored: StoredItem[] = JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+
+      const itemsPayload = stored.map((item) => ({
+        name: item.name,
+        amount: item.price * 100,
+        qty: item.qty + "",
+      }));
+
       const resp = await fetch("http://127.0.0.1:8000/create-checkout", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(itemsPayload),
       });
       const data = await resp.json();
-      if (resp.ok && data.checkoutUrl) {
-        setCheckoutUrl(data.checkoutUrl);
+      const url = data.checkout_url;
+
+      if (resp.ok && url) {
+        setCheckoutUrl(url);
       } else {
         handleCheckoutError();
       }
@@ -84,30 +105,27 @@ const Checkout = () => {
       <div className="flex flex-row cursor-pointer">
         <TipButton
           percent={5}
-          amount="$1.90"
-          value="5"
-          selectedTip={selectedTip}
-          setSelectedTip={setSelectedTip}
+          amount={formatCurrency(subtotal * 0.05)}
+          selected={selectedTip === 5}
+          onSelect={() => setSelectedTip(5)}
         />
         <TipButton
           percent={10}
-          amount="$3.80"
-          value="10"
-          selectedTip={selectedTip}
-          setSelectedTip={setSelectedTip}
+          amount={formatCurrency(subtotal * 0.1)}
+          selected={selectedTip === 10}
+          onSelect={() => setSelectedTip(10)}
         />
         <TipButton
           percent={15}
-          amount="$5.70"
-          value="15"
-          selectedTip={selectedTip}
-          setSelectedTip={setSelectedTip}
+          amount={formatCurrency(subtotal * 0.15)}
+          selected={selectedTip === 15}
+          onSelect={() => setSelectedTip(15)}
         />
         <TipButton
           percent={0}
-          value="none"
-          selectedTip={selectedTip}
-          setSelectedTip={setSelectedTip}
+          amount={formatCurrency(0)}
+          selected={selectedTip === 0}
+          onSelect={() => setSelectedTip(0)}
         />
       </div>
       <div className="border-b-1 border-[#a6a6a6] w-full mt-10"></div>
@@ -128,7 +146,7 @@ const Checkout = () => {
             Subtotal
           </h1>
           <h1 className="text-lg font-sans font-semibold tracking-wider">
-            $6.00
+            {formatCurrency(subtotal)}
           </h1>
         </div>
         <div className="flex flex-row justify-between">
@@ -144,7 +162,7 @@ const Checkout = () => {
             Tip
           </h1>
           <h1 className="text-lg font-sans font-semibold tracking-wider">
-            {tipAmountMap[selectedTip ?? "none"]}
+            {formatCurrency(tipAmount)}
           </h1>
         </div>
         <div className="flex flex-row justify-between mt-5">
@@ -152,7 +170,7 @@ const Checkout = () => {
             Estimated order total
           </h1>
           <h1 className="text-2xl font-sans font-semibold tracking-wider">
-            {totalAmountMap[selectedTip ?? "none"]}
+            {formatCurrency(estimatedTotal)}
           </h1>
         </div>
       </div>

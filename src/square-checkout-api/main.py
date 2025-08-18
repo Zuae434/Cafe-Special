@@ -9,6 +9,8 @@ from fastapi.responses import JSONResponse
 from square import Square
 from square.environment import SquareEnvironment
 from dotenv import load_dotenv
+from pydantic import BaseModel
+from fastapi import Body
 
 load_dotenv()
 SQUARE_ACCESS_TOKEN = os.getenv("SQUARE_ACCESS_TOKEN")
@@ -29,25 +31,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/create-checkout") 
-def create_checkout():
-    idempotency_key = str(uuid.uuid4())
+class CartItem(BaseModel):
+    name: str
+    amount: int
+    qty: str
+
+@app.post("/create-checkout")
+async def create_checkout(items: list[CartItem] = Body(...)):
     try:
-        response = client.checkout.payment_links.create(
-            idempotency_key=idempotency_key,
-            quick_pay={
-                "name": "Chai Frappe",
-                "price_money": {
-                    "amount": 600,
+        idempotency_key = str(uuid.uuid4())
+        line_items = [
+            {
+                "name": item.name,
+                "quantity": item.qty,
+                "base_price_money": {
+                    "amount": item.amount,
                     "currency": "USD"
-                },
-                "location_id": SQUARE_LOCATION_ID
+                }
+            }
+            for item in items
+        ]
+        response = client.checkout.payment_links.create(
+            idempotency_key = idempotency_key,
+            order={
+                "location_id": SQUARE_LOCATION_ID,
+                "line_items": line_items
             }
         )
-        url = response.payment_link.url
-        preview_url = response.payment_link.long_url
-        return {
-            "checkoutUrl": url
-        }
+        return {"checkout_url": response.payment_link.url}
     except ApiError as e:
         return JSONResponse(status_code=e.status_code, content={"error": e.body})
