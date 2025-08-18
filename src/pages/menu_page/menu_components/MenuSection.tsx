@@ -19,7 +19,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, items }) => {
 
   return (
     <section className="mt-10 py-8 px-4">
-      <h2 className="text-6xl font-serif font-bold mb-6 indent-10 text-title-text">
+      <h2 className="text-6xl font-serif font-bold mb-6 indent-10 text-[#2E3F59]">
         {title}
       </h2>
       <div

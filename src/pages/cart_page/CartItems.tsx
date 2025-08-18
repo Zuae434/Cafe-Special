@@ -14,7 +14,7 @@ const CartItems = () => {
   if (cart.length === 0) {
     return (
       <>
-        <h1 className="text-4xl font-tiltwarp font-bold text-title-text">
+        <h1 className="text-4xl font-tiltwarp font-bold text-[#2E3F59]">
           Your cart
         </h1>
         <p className="mt-5 text-xl">Your cart is empty.</p>

@@ -1,14 +1,9 @@
-import {
-  LocationIcon,
-  ClockIcon,
-  SwitchOffIcon,
-  SwitchOnIcon,
-  CouponIcon,
-} from "./cartIcons";
+import { LocationIcon, ClockIcon, CouponIcon } from "./cartIcons";
 import { useState, useEffect } from "react";
-import TipButton from "./TipButton";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TipButton from "./TipButton";
 import useCart from "./useCart";
 
 interface StoredItem {
@@ -27,7 +22,6 @@ const Checkout = () => {
   const handleCheckoutError = () => {
     toast.error("Failed to checkout!");
   };
-  const [isCurbside, setIsCurbSide] = useState(false);
   const [selectedTip, setSelectedTip] = useState(0);
 
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
@@ -85,24 +79,19 @@ const Checkout = () => {
       {/* ========================================
                       Checkout Summary  
         ========================================= */}
-      <h1 className="flex flex-row gap-2 text-sm font-sans font-semibold tracking-wider">
-        {LocationIcon} Pickup: 558 Riverdale Dr Ste #208
+      <h1 className="flex items-center gap-2 text-xs sm:text-sm font-sans font-semibold tracking-wider text-[#2E3F59]">
+        <span className="shrink-0">{LocationIcon}</span>{" "}
+        <span className="leading-tight">Pickup: 558 Riverdale Dr Ste #208</span>
       </h1>
-      <h1 className="flex flex-row gap-2 text-sm font-sans font-semibold tracking-wider mt-3">
-        {ClockIcon} Today at 8:22 AM
+      <h1 className="flex items-center gap-2 text-xs sm:text-sm font-sans font-semibold tracking-wider mt-2 sm:mt-3 text-[#2E3F59]">
+        <span className="shrink-0">{ClockIcon}</span>{" "}
+        <span className="leading-tight">Today at 8:22 AM</span>
       </h1>
-      <h1
-        className="flex flex-row gap-2 text-sm font-sans font-semibold tracking-wider mt-8"
-        onClick={() => setIsCurbSide(!isCurbside)}
-      >
-        <span className="cursor-pointer">
-          {isCurbside ? SwitchOnIcon : SwitchOffIcon}
-        </span>
-        Curbside Pickup
+      <div className="border-b-1 border-[#D1D3D4] w-full mt-10"></div>
+      <h1 className="font-tiltwarp font-black text-xl sm:text-2xl mt-5 text-[#2E3F59]">
+        Add a tip
       </h1>
-      <div className="border-b-1 border-[#a6a6a6] w-full mt-10"></div>
-      <h1 className="font-tiltwarp font-black text-2xl mt-5">Add a tip</h1>
-      <div className="flex flex-row cursor-pointer">
+      <div className="flex flex-row flex-wrap gap-2 sm:gap-3 mt-2 cursor-pointer">
         <TipButton
           percent={5}
           amount={formatCurrency(subtotal * 0.05)}
@@ -128,48 +117,48 @@ const Checkout = () => {
           onSelect={() => setSelectedTip(0)}
         />
       </div>
-      <div className="border-b-1 border-[#a6a6a6] w-full mt-10"></div>
+      <div className="border-b-1 border-[#D1D3D4] w-full mt-10"></div>
       <div className="relative w-full">
-        <span className="absolute left-3 top-3/4 -translate-y-1/2">
+        <span className="absolute left-3 top-11/16 md:top-3/4 -translate-y-1/2 pointer-events-none">
           {CouponIcon}
         </span>
         <input
           type="text"
           placeholder="Add coupon or gift card"
-          className="w-full h-12 mt-10 px-10 py-2 bg-white bg-opacity-20 text-xl text-[#807D7D] border border-[#d9d9d9] rounded-md"
+          className="w-full h-11 sm:h-12 mt-6 sm:mt-10 pl-10 pr-3 py-2 bg-[#D1D3D4]/20 text-base sm:text-xl text-[#2E3F59] placeholder:text-[#636466] border border-[#D1D3D4] rounded-md focus:outline-none focus:ring-2 focus:ring-[#4D79A9]"
         />
       </div>
-      <div className="border-b-1 border-[#a6a6a6] w-full mt-10"></div>
+      <div className="border-b-1 border-[#D1D3D4] w-full mt-10"></div>
       <div className="flex flex-col gap-1 mt-10">
         <div className="flex flex-row justify-between">
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#636466]">
             Subtotal
           </h1>
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#2E3F59]">
             {formatCurrency(subtotal)}
           </h1>
         </div>
         <div className="flex flex-row justify-between">
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#636466]">
             Estimated Tax
           </h1>
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#2E3F59]">
             $0.00
           </h1>
         </div>
         <div className="flex flex-row justify-between">
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#636466]">
             Tip
           </h1>
-          <h1 className="text-lg font-sans font-semibold tracking-wider">
+          <h1 className="text-base sm:text-lg font-sans font-semibold tracking-wider text-[#2E3F59]">
             {formatCurrency(tipAmount)}
           </h1>
         </div>
         <div className="flex flex-row justify-between mt-5">
-          <h1 className="text-2xl font-sans font-black tracking-wider">
+          <h1 className="text-xl sm:text-2xl font-sans font-black tracking-wider text-[#2E3F59]">
             Estimated order total
           </h1>
-          <h1 className="text-2xl font-sans font-semibold tracking-wider">
+          <h1 className="text-xl sm:text-2xl font-sans font-bold tracking-wider text-[#4D79A9]">
             {formatCurrency(estimatedTotal)}
           </h1>
         </div>
@@ -177,7 +166,7 @@ const Checkout = () => {
       <button
         onClick={handleCheckout}
         disabled={isSubmitting}
-        className="w-full h-15 mt-5 bg-black text-white text-xl rounded-md font-sans transition-all duration-150 ease-in cursor-pointer disabled:opacity-50"
+        className="w-full h-12 sm:h-14 mt-5 bg-[#4D79A9] hover:bg-[#2E3F59] text-white text-lg sm:text-xl rounded-md font-sans transition-all duration-150 ease-in cursor-pointer disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#D1D3D4]"
       >
         {isSubmitting ? "Processing..." : "Checkout"}
       </button>

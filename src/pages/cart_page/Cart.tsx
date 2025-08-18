@@ -11,20 +11,33 @@ const Cart = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="flex justify-center p-10 bg-[#F3B54A]">
-        <Link to="/Menu">
-          <h1 className="absolute left-20 top-30 text-white text-2xl font-sans">
-            &#8592; Continue Shopping
-          </h1>
-        </Link>
-        <img src={HeaderLogo} alt="Header Logo" />
-      </div>
-      <div className="flex flex-row gap-5 pl-25 bg-repeating-stripes">
-        <div className="container mx-auto mt-20 max-w-[50%]">
-          <CartItems />
+      <div className="bg-[#002147]/95">
+        <div className="relative mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <Link
+            to="/Menu"
+            className="sm:absolute sm:left-4 sm:top-1/2 sm:-translate-y-1/2"
+          >
+            <span className="inline-flex items-center gap-2 text-[#F5F7FA] text-base sm:text-lg font-sans hover:underline">
+              <span aria-hidden>←</span> Continue Shopping
+            </span>
+          </Link>
+          <img
+            src={HeaderLogo}
+            alt="Header Logo"
+            className="h-12 sm:h-16 md:h-20 w-auto"
+          />
         </div>
-        <div className="container mx-auto mt-20 max-w-[35%]">
-          <Checkout />
+      </div>
+      <div className="bg-[#F5F7FA]">
+        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="lg:col-span-2">
+              <CartItems />
+            </div>
+            <div>
+              <Checkout />
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
