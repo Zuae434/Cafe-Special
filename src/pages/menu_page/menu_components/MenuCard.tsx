@@ -5,9 +5,15 @@ type MenuCardProps = {
   image: string;
   title: string;
   subtitle: string;
+  price: string;
 };
 
-const MenuCard: React.FC<MenuCardProps> = ({ image, title, subtitle }) => {
+const MenuCard: React.FC<MenuCardProps> = ({
+  image,
+  title,
+  subtitle,
+  price,
+}) => {
   const { addToCart } = useCart();
   const handleAddToCart = () => {
     addToCart({ id: title, name: title, price: 6, image });
@@ -33,7 +39,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, subtitle }) => {
             {subtitle}
           </p>
           <p className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 font-georgia">
-            $6.00
+            ${price}
           </p>
           <button
             onClick={handleAddToCart}

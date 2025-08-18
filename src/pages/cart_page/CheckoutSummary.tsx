@@ -21,13 +21,16 @@ const Checkout = () => {
     toast.error("Failed to checkout!");
   };
   const [selectedTip, setSelectedTip] = useState(0);
+  const [customTip, setCustomTip] = useState("");
 
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { cart } = useCart();
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const tipAmount = (subtotal * selectedTip) / 100;
+  const customTipNumber = parseFloat(customTip || "0") || 0;
+  const tipAmount =
+    selectedTip === -1 ? customTipNumber : (subtotal * selectedTip) / 100;
   const estimatedTotal = subtotal + tipAmount;
 
   useEffect(() => {
@@ -113,6 +116,20 @@ const Checkout = () => {
           amount={formatCurrency(0)}
           selected={selectedTip === 0}
           onSelect={() => setSelectedTip(0)}
+        />
+        <TipButton
+          percent={-1}
+          isCustom
+          amount={customTip ? formatCurrency(parseFloat(customTip) || 0) : ""}
+          selected={selectedTip === -1}
+          onSelect={() => setSelectedTip(-1)}
+          customValue={customTip}
+          onCustomChange={setCustomTip}
+          onCustomSubmit={() => {
+            // normalize empty/NaN to 0 on submit
+            const n = parseFloat(customTip || "0");
+            if (!isFinite(n) || n < 0) setCustomTip("0");
+          }}
         />
       </div>
       <div className="border-b-1 border-[#D1D3D4] w-full mt-10"></div>

@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import Header from "../components/header";
 import MenuSection from "./menu_components/MenuSection";
 import {
-  icedCoffee,
-  blended,
-  matcha,
-  hotCoffee,
+  Salads,
+  Entrees,
+  Pizzas,
+  Beverages,
   pastries,
 } from "./menu_components/MenuData";
 import CountUp from "./menu_components/CountUp";
@@ -26,7 +26,7 @@ const Menu = () => {
               SHOP ALL
             </h1>
             <div className="absolute top-0 right-4 sm:right-[30px] flex items-center gap-3 sm:gap-[15px]">
-              <Link to="/Signup">
+              <Link to="/Dashboard">
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -127,10 +127,10 @@ const Menu = () => {
           </div>
           <div className="px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10 mt-4 sm:mt-8">
             <MenuSection title="Specials" items={pastries} />
-            <MenuSection title="Salads" items={icedCoffee} />
-            <MenuSection title="Entrees" items={blended} />
-            <MenuSection title="Pizza" items={matcha} />
-            <MenuSection title="Beverages" items={hotCoffee} />
+            <MenuSection title="Salads" items={Salads} />
+            <MenuSection title="Entrees" items={Entrees} />
+            <MenuSection title="Pizza" items={Pizzas} />
+            <MenuSection title="Beverages" items={Beverages} />
           </div>
         </div>
       </div>

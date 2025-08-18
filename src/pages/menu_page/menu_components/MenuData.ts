@@ -5,104 +5,115 @@ import BlendedChocolate from "./MenuImages/BlendedChocolate.png";
 import BlendedCinnamon from "./MenuImages/BlendedCinnamon.png";
 import Caramel from "./MenuImages/Caramel.png";
 import CinnamonBun from "./MenuImages/CinnamonBun.png";
-import CoffeeBreakCoffee from "./MenuImages/CoffeeBreakCoffee.png";
 import ChocolateCake from "./MenuImages/ChocolateCake.png";
 import DripCoffee from "./MenuImages/DripCoffee.png";
 import Espresso from "./MenuImages/Espresso.png";
 import Hazelnut from "./MenuImages/Hazelnut.png";
 import IslandVaca from "./MenuImages/IslandVaca.png";
-import Macchiato from "./MenuImages/Macchiato.png";
 import Matcha from "./MenuImages/Matcha.png";
 import MatchaLatte from "./MenuImages/MatchLatte.png";
-import Mocha from "./MenuImages/Mocha.png";
 import PainAuxRaisin from "./MenuImages/PainAuxRaisin.png";
 import PastryPuff from "./MenuImages/PastryPuff.png";
-import Waikiki from "./MenuImages/Waikiki.png";
 
-export const icedCoffee = [
+export const Salads = [
   {
     image: Espresso,
-    title: "Latte",
-    subtitle: "Espresso / 2% Milk",
+    title: "Southwest Chicken Salad",
+    subtitle: "",
+    price: "11.00",
   },
   {
     image: Hazelnut,
-    title: "Hazelnut Latte",
-    subtitle: "Espresso / Hazelnut",
+    title: "Garden Salad",
+    subtitle: "",
+    price: "11.00",
   },
   {
     image: Caramel,
-    title: "Caramel Paradise",
-    subtitle: "Espresso / Caramel",
-  },
-  {
-    image: Waikiki,
-    title: "Waikiki Coconut",
-    subtitle: "Espresso / Coconut",
+    title: "Chopped Cobb",
+    subtitle: "",
+    price: "10.00",
   },
 ];
 
-export const blended = [
+export const Entrees = [
   {
     image: Blended,
-    title: "Chai Frappe",
-    subtitle: "Espresso / Cocoa Drizzle",
+    title: "PB & J Deluxe Lunch Box",
+    subtitle: "",
+    price: "5.00",
   },
   {
     image: BlendedChocolate,
-    title: "Chocolate",
-    subtitle: "Espresso / Hershey Drizzle",
+    title: "Chicken Fritter Basket",
+    subtitle: "",
+    price: "7.50",
   },
   {
     image: BlendedCinnamon,
-    title: "Cinnamon Holiday",
-    subtitle: "Espresso / Cinnamon",
+    title: "Turkery Avacado Sandwhich",
+    subtitle: "",
+    price: "11.00",
+  },
+  {
+    image: ChocolateCake,
+    title: "Hot Ham & Cheese Sandwich",
+    subtitle: "",
+    price: "11.00",
+  },
+  {
+    image: ApplePastry,
+    title: "Grilled Cheese Sandwich",
+    subtitle: "",
+    price: "8.00",
+  },
+  {
+    image: CinnamonBun,
+    title: "Drugstore Burger",
+    subtitle: "",
+    price: "10.00",
+  },
+  {
+    image: PainAuxRaisin,
+    title: "Grilled Chicken Quesadilla",
+    subtitle: "",
+    price: "9.00",
   },
 ];
 
-export const matcha = [
+export const Pizzas = [
   {
     image: Matcha,
-    title: "Matcha",
-    subtitle: "2% Milk",
+    title: "Three Cheese",
+    subtitle: "",
+    price: "9.00",
   },
   {
     image: MatchaLatte,
-    title: "Matcha Latte",
-    subtitle: "Matcha / 2% Milk",
+    title: "Pepperoni",
+    subtitle: "",
+    price: "10.00",
   },
   {
     image: IslandVaca,
-    title: "Island Vaca",
-    subtitle: "Matcha / Coconut",
+    title: "Margherita",
+    subtitle: "",
+    price: "10.00",
   },
 ];
 
-export const hotCoffee = [
+export const Beverages = [
   {
     image: Americano,
-    title: "Americano",
-    subtitle: "Espresso / Hot Water",
+    title: "Fountain Drinks",
+    subtitle: "",
+    price: "2.00",
   },
   {
     image: DripCoffee,
-    title: "Drip Coffee",
-    subtitle: "Ground Coffee / 2% Milk",
-  },
-  {
-    image: CoffeeBreakCoffee,
-    title: "Coffee Break",
-    subtitle: "Espresso / Caramel",
-  },
-  {
-    image: Macchiato,
-    title: "Mocchiato",
-    subtitle: "Espresso / Foam",
-  },
-  {
-    image: Mocha,
-    title: "Mocha",
-    subtitle: "Latte / Chocolate",
+    title: "Packaged Beverages",
+    subtitle: "",
+    price: "2.50",
   },
 ];
 
@@ -111,25 +122,30 @@ export const pastries = [
     image: ChocolateCake,
     title: "Chocolate Cake",
     subtitle: "Fudge / Chocolate",
+    price: "6.00",
   },
   {
     image: ApplePastry,
     title: "Apple Pastry",
     subtitle: "Apple / Cinnamon",
+    price: "6.00",
   },
   {
     image: PainAuxRaisin,
     title: "Pain Aux Raisin",
     subtitle: "Honey / Raisin",
+    price: "6.00",
   },
   {
     image: PastryPuff,
     title: "Pastry Puff",
     subtitle: "Fresh / Whipped",
+    price: "6.00",
   },
   {
     image: CinnamonBun,
     title: "Cinnamon Bun",
     subtitle: "Hot Glaze / Cinnamon",
+    price: "6.00",
   },
 ];

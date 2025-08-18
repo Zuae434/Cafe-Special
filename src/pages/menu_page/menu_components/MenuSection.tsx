@@ -6,6 +6,7 @@ type SectionItem = {
   image: string;
   title: string;
   subtitle: string;
+  price: string;
 };
 
 type MenuSectionProps = {
@@ -34,6 +35,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ title, items }) => {
               image={item.image}
               title={item.title}
               subtitle={item.subtitle}
+              price={item.price}
             />
           ))}
         </div>
