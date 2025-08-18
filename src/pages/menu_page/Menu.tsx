@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../components/header";
 import MenuSection from "./menu_components/MenuSection";
-import { icedCoffee, blended, matcha, hotCoffee, pastries } from "./menu_components/MenuData";
-import Footer from "../components/Footer";
-// import CountUp from "./menu_components/CountUp";
+import {
+  icedCoffee,
+  blended,
+  matcha,
+  hotCoffee,
+  pastries,
+} from "./menu_components/MenuData";
+import CountUp from "./menu_components/CountUp";
 
 const Menu = () => {
   return (
@@ -12,18 +17,18 @@ const Menu = () => {
       <div className="bg-repeating-stripes">
         <Header />
         <div className="yellow-overlay">
-          <div className="relative mt-10 pt-20">
-            <h1 className="absolute left-1/2 top-0 transform -translate-x-1/2 text-title-text font-bold text-4xl">SHOP ALL</h1>
-            <div className="absolute top-0 right-30 flex items-center space-x-15">
+          <div className="relative mt-6 sm:mt-10 pt-16 sm:pt-20">
+            <h1 className="absolute left-1/2 top-0 -translate-x-1/2 text-[#2E3F59] font-bold text-2xl sm:text-4xl text-center px-4">
+              SHOP ALL
+            </h1>
+            <div className="absolute top-0 right-4 sm:right-[30px] flex items-center gap-3 sm:gap-[15px]">
               <Link to="/Signup">
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="50"
-                    height="50"
                     viewBox="0 0 50 50"
                     fill="none"
-                    className="cursor-pointer text-[#764D3D] hover:text-[#EAB85F] transition-all duration-150 ease-in-out"
+                    className="w-8 h-8 sm:w-12 sm:h-12 cursor-pointer text-[#2E3F59] hover:text-[#4D79A9] transition-all duration-150 ease-in-out"
                   >
                     <path
                       d="M49.9102 46.5621C48.3467 37.3353 41.4255 29.227 32.5771 26.2505C37.7806 22.9888 40.1415 16.3302 38.4648 10.4085C36.7881 4.48917 30.9341 0.0315758 24.7982 0.000167197C18.6623 -0.0312414 12.765 4.36596 11.0256 10.2683C9.28869 16.1707 11.8592 23.0758 17.0266 26.393C12.8854 27.473 9.26219 29.9881 6.47732 33.2425C4.72352 35.313 3.28772 37.6204 2.12174 40.0702C1.29062 41.8146 0.975029 43.6001 0.425763 45.4411C0.225812 46.1103 0.0234507 46.7868 0.00176915 47.4851C-0.0199124 48.1833 0.155949 48.9129 0.625715 49.4276C1.09548 49.9422 1.90011 50.1765 2.52164 49.8625C2.97455 49.6329 3.26363 49.1618 3.40577 48.6738C3.46359 48.4732 3.50213 48.2703 3.52863 48.0649C3.56718 47.7677 3.58404 47.4633 3.61295 47.1637C3.87794 44.3128 5.23183 41.3966 6.70377 38.9734C8.55874 35.9146 11.1605 33.3005 14.261 31.5126C20.1511 28.1181 27.6915 27.7919 33.8514 30.6646C40.0114 33.5373 44.6223 39.5315 45.8317 46.2336C45.9931 47.1299 46.1087 48.0673 46.5881 48.8405C47.0675 49.6136 48.0504 50.1693 48.8936 49.8335C50.0427 49.3768 50.1174 47.7871 49.9102 46.5646V46.5621ZM24.7886 24.9023C18.8767 24.9023 14.0827 20.1137 14.0827 14.2089C14.0827 8.30411 18.8743 3.51309 24.7886 3.51309C30.7028 3.51309 35.4944 8.30169 35.4944 14.2065C35.4944 20.1113 30.7004 24.8999 24.7886 24.8999V24.9023Z"
@@ -35,11 +40,9 @@ const Menu = () => {
               <Link to="/Cart">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="60"
-                  height="50"
                   viewBox="0 0 60 50"
                   fill="none"
-                  className="cursor-pointer text-[#764D3D] hover:text-[#EAB85F] transition-all duration-150 ease-in-out"
+                  className="w-9 h-8 sm:w-[60px] sm:h-[50px] cursor-pointer text-[#2E3F59] hover:text-[#4D79A9] transition-all duration-150 ease-in-out"
                 >
                   <path
                     d="M1.63028 0.10742C2.6542 -0.0949651 3.93074 0.0507525 4.73428 0.0507525C6.66119 0.0507525 8.58809 0.0507525 10.5123 0.0507525C11.3347 0.0507525 12.02 0.218058 12.4849 0.965535C12.7805 1.44586 12.9122 2.00715 13.0385 2.56033C13.4255 4.25497 13.8098 5.94692 14.1968 7.64156C14.221 7.7414 16.6988 7.65235 16.8627 7.65235H55.1535C56.3333 7.65235 57.6018 7.45266 58.7359 7.87902C60.386 8.49967 60.0769 10.2294 59.7141 11.6218C59.1686 13.7185 58.6257 15.8125 58.0802 17.9092C57.3519 20.7076 56.7364 23.5356 56.0216 26.3366C55.7018 27.5887 55.5755 28.8785 55.3282 30.1468C55.1455 31.0751 55.0084 32.1626 54.272 32.8237C53.7211 33.3202 52.9848 33.5685 52.2511 33.6575C51.168 33.7871 50.0178 33.6926 48.9294 33.6953C47.7577 33.6953 46.5832 33.698 45.4115 33.698C40.7569 33.7034 36.1022 33.7061 31.4475 33.7115C27.884 33.7142 24.2237 33.9139 20.6816 33.7034C21.1573 35.8217 21.7243 37.9346 22.2887 40.0421L52.0092 39.918C52.7429 40.1528 53.4981 40.8328 53.5061 41.6045C53.5169 42.3763 52.9901 43.1265 52.2645 43.3774L48.623 43.426L48.6311 43.6608C49.9641 44.4029 50.7461 45.8789 50.3618 47.3577C49.9775 48.8391 48.5182 49.9644 46.9944 49.9563C45.4706 49.9482 44.0248 48.8095 43.6539 47.3226C43.2831 45.8384 44.0275 44.1492 45.3685 43.4206L32.7886 43.542C31.3562 43.542 29.9184 43.3909 28.486 43.426H25.8066C27.2766 44.0655 27.8947 45.5605 27.5803 47.1391C27.2659 48.7177 25.7663 49.9752 24.1619 49.9995C22.5574 50.0238 21.0202 48.8176 20.6574 47.247C20.3215 45.7926 21.1197 44.0682 22.5494 43.6608L20.214 43.426V43.542C19.8592 43.542 19.6496 43.1184 19.4481 42.8242C19.2465 42.5301 19.1471 42.1766 19.053 41.8312L17.7657 37.1143C15.8845 30.2224 14.4414 23.0984 12.716 16.1633C11.977 13.1923 11.2675 10.2159 10.4236 7.27187C10.0904 6.11152 9.85387 4.94038 9.60932 3.75576C8.01835 3.76655 6.43275 3.73147 4.84178 3.73147C3.25081 3.73147 0.0742455 4.33593 0.0016861 1.9181C-0.0332527 0.768546 0.695045 0.288218 1.63028 0.104722V0.10742ZM54.5569 18.9131L56.3011 11.3223L49.1551 11.155L47.8248 19.2477L54.5542 18.9131H54.5569ZM51.9313 30.1279L53.6942 22.6208L47.8383 22.5911L46.9864 30.0686L51.934 30.1252L51.9313 30.1279ZM45.2825 11.2764L38.1635 11.2386L38.1258 18.8429H44.3795L45.2825 11.2764ZM43.1621 30.0821L44.0866 22.5776H38.1447L38.1097 30.1171L43.1621 30.0821ZM29.5878 30.0713H34.3634L34.3339 22.5938L28.7332 22.5641L29.5851 30.0713H29.5878ZM28.2495 18.8618L34.3715 18.7916L34.4413 11.217L27.2874 11.182L28.2495 18.8645V18.8618ZM20.5768 30.1009H25.7797L24.9278 22.5641L18.787 22.6505L20.5768 30.1009ZM17.7872 18.8483L24.4118 18.824L23.4954 11.2521L15.9544 11.2764L17.7872 18.8483Z"
@@ -49,13 +52,83 @@ const Menu = () => {
               </Link>
             </div>
           </div>
-          <MenuSection title="Iced Coffee" items={icedCoffee} />
-          <MenuSection title="Blended" items={blended} />
-          <MenuSection title="Matcha" items={matcha} />
-          <MenuSection title="Hot Coffee" items={hotCoffee} />
-          <MenuSection title="Pastries" items={pastries} />
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 text-center">
+            <h1 className="text-[#2E3F59] text-lg sm:text-2xl text-center py-2">
+              4.8
+            </h1>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 39 38"
+              fill="none"
+              className="w-5 h-5 sm:w-10 sm:h-10"
+            >
+              <path
+                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
+                fill="#FAB80C"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 39 38"
+              fill="none"
+              className="w-5 h-5 sm:w-10 sm:h-10"
+            >
+              <path
+                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
+                fill="#FAB80C"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 39 38"
+              fill="none"
+              className="w-5 h-5 sm:w-10 sm:h-10"
+            >
+              <path
+                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
+                fill="#FAB80C"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 39 38"
+              fill="none"
+              className="w-5 h-5 sm:w-10 sm:h-10"
+            >
+              <path
+                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
+                fill="#FAB80C"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 39 38"
+              fill="none"
+              className="w-5 h-5 sm:w-10 sm:h-10"
+            >
+              <path
+                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
+                fill="#FAB80C"
+              />
+            </svg>
+            <CountUp
+              from={0}
+              to={43128}
+              separator=","
+              direction="up"
+              duration={2}
+              className="count-up-text text-lg sm:text-2xl pl-0 sm:pl-3"
+            />{" "}
+            <h1 className="text-lg sm:text-2xl pl-1 text-[#636466]">Reviews</h1>
+          </div>
+          <div className="px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10 mt-4 sm:mt-8">
+            <MenuSection title="Specials" items={pastries} />
+            <MenuSection title="Salads" items={icedCoffee} />
+            <MenuSection title="Entrees" items={blended} />
+            <MenuSection title="Pizza" items={matcha} />
+            <MenuSection title="Beverages" items={hotCoffee} />
+          </div>
         </div>
-        <Footer transparent />
       </div>
     </motion.div>
   );

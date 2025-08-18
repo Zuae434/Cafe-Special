@@ -1,4 +1,5 @@
 import "../../App.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const logo = (
@@ -59,17 +60,120 @@ const logo = (
 );
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="header-container sticky flex flex-row items-center max-w-lvw min-h-[75px] bg-[#2E3F59] justify-around text-nav-text font-georgia text-lg z-10">
-      <Link to="/">
-        <button className="hover:cursor-pointer">{logo}</button>
-      </Link>
-      <Link to="/Menu">
-        <button className="min-w-[175px] min-h-[35px] bg-nav-text text-[#D29429] rounded-4xl font-sans hover:text-nav-text hover:bg-order-hover transition-all duration-150 ease-in cursor-pointer">
-          ORDER NOW
-        </button>
-      </Link>
-    </div>
+    <header className="header-container sticky top-0 z-50 bg-[#2E3F59]/95 text-white font-georgia">
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-[72px] items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="shrink-0" aria-label="Cafe Special Home">
+            <button className="hover:cursor-pointer" aria-hidden>
+              {logo}
+            </button>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-lg">
+            <Link
+              to="/Story"
+              className="hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9] transition-all duration-150 ease-in"
+            >
+              OUR STORY
+            </Link>
+            <Link
+              to="/Locations"
+              className="hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9] transition-all duration-150 ease-in"
+            >
+              LOCATIONS
+            </Link>
+            <Link
+              to="/Contact"
+              className="hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9] transition-all duration-150 ease-in"
+            >
+              CONTACT
+            </Link>
+          </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            <Link to="/Menu">
+              <button className="hover:cursor-pointer min-w-[150px] h-10 px-4 bg-[#4D79A9] text-white rounded-4xl font-sans hover:bg-[#D1D3D4] hover:text-[#2E3F59] transition-all duration-150 ease-in">
+                ORDER NOW
+              </button>
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="md:hidden inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1D3D4]"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className="h-7 w-7"
+              fill="currentColor"
+            >
+              {open ? (
+                <path
+                  fillRule="evenodd"
+                  d="M6.225 4.811a1 1 0 011.414 0L12 9.172l4.361-4.361a1 1 0 111.414 1.414L13.414 10.586l4.361 4.361a1 1 0 01-1.414 1.414L12 12l-4.361 4.361a1 1 0 01-1.414-1.414L10.586 10.586 6.225 6.225a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              ) : (
+                <path
+                  d="M3 6h18M3 12h18M3 18h18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile slide-down panel */}
+      <div
+        className={`md:hidden absolute left-0 right-0 top-[72px] origin-top transform bg-[#2E3F59]/95 text-white shadow-md transition-all duration-200 ${
+          open
+            ? "scale-y-100 opacity-100"
+            : "scale-y-0 opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="mx-auto max-w-screen-xl px-4 py-4 space-y-2">
+          <Link
+            to="/Story"
+            className="block py-2 text-base font-medium hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9]"
+            onClick={() => setOpen(false)}
+          >
+            OUR STORY
+          </Link>
+          <Link
+            to="/Locations"
+            className="block py-2 text-base font-medium hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9]"
+            onClick={() => setOpen(false)}
+          >
+            LOCATIONS
+          </Link>
+          <Link
+            to="/Contact"
+            className="block py-2 text-base font-medium hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9]"
+            onClick={() => setOpen(false)}
+          >
+            CONTACT
+          </Link>
+          <Link to="/Menu" onClick={() => setOpen(false)}>
+            <button className="mt-2 w-full h-11 bg-[#4D79A9] text-white rounded-4xl font-sans hover:bg-[#D1D3D4] hover:text-[#2E3F59] transition-all duration-150 ease-in">
+              ORDER NOW
+            </button>
+          </Link>
+        </div>
+      </div>
+    </header>
   );
 };
 

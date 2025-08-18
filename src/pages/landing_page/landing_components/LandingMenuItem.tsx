@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const PlusButton = (
   <svg
@@ -67,7 +66,6 @@ const LandingMenuItem: React.FC<LandingMenuItemProps> = ({
             {PlusButton}
           </button>
         </div>
-        <ToastContainer position="top-center" />
       </div>
     </>
   );
