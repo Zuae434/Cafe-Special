@@ -1,4 +1,4 @@
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useCart from "../../cart_page/useCart";
 
 type MenuCardProps = {
@@ -44,7 +44,6 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, subtitle }) => {
           </button>
         </div>
       </div>
-      <ToastContainer position="top-center" />
     </>
   );
 };

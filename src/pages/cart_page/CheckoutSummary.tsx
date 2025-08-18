@@ -1,8 +1,6 @@
 import { LocationIcon, ClockIcon, CouponIcon } from "./cartIcons";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import TipButton from "./TipButton";
 import useCart from "./useCart";
 
@@ -170,7 +168,6 @@ const Checkout = () => {
       >
         {isSubmitting ? "Processing..." : "Checkout"}
       </button>
-      <ToastContainer position="top-center" />
     </>
   );
 };

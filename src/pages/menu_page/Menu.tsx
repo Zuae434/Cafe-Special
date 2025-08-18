@@ -9,7 +9,6 @@ import {
   hotCoffee,
   pastries,
 } from "./menu_components/MenuData";
-import Footer from "../components/Footer";
 import CountUp from "./menu_components/CountUp";
 
 const Menu = () => {
@@ -134,7 +133,6 @@ const Menu = () => {
             <MenuSection title="Beverages" items={hotCoffee} />
           </div>
         </div>
-        <Footer transparent />
       </div>
     </motion.div>
   );
