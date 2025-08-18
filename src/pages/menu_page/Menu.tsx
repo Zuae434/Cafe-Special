@@ -2,30 +2,18 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../components/header";
 import MenuSection from "./menu_components/MenuSection";
-import {
-  icedCoffee,
-  blended,
-  matcha,
-  hotCoffee,
-  pastries,
-} from "./menu_components/MenuData";
+import { icedCoffee, blended, matcha, hotCoffee, pastries } from "./menu_components/MenuData";
 import Footer from "../components/Footer";
-import CountUp from "./menu_components/CountUp";
+// import CountUp from "./menu_components/CountUp";
 
 const Menu = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <div className="bg-repeating-stripes">
         <Header />
         <div className="yellow-overlay">
           <div className="relative mt-10 pt-20">
-            <h1 className="absolute left-1/2 top-0 transform -translate-x-1/2 text-title-text font-bold text-4xl">
-              SHOP ALL
-            </h1>
+            <h1 className="absolute left-1/2 top-0 transform -translate-x-1/2 text-title-text font-bold text-4xl">SHOP ALL</h1>
             <div className="absolute top-0 right-30 flex items-center space-x-15">
               <Link to="/Signup">
                 <button>
@@ -60,78 +48,6 @@ const Menu = () => {
                 </svg>
               </Link>
             </div>
-          </div>
-          <div className="flex flex-row items-center justify-center">
-            <h1 className="text-black text-2xl text-center p-3">4.8</h1>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="39"
-              height="38"
-              viewBox="0 0 39 38"
-              fill="none"
-            >
-              <path
-                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
-                fill="#FAB80C"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="39"
-              height="38"
-              viewBox="0 0 39 38"
-              fill="none"
-            >
-              <path
-                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
-                fill="#FAB80C"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="39"
-              height="38"
-              viewBox="0 0 39 38"
-              fill="none"
-            >
-              <path
-                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
-                fill="#FAB80C"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="39"
-              height="38"
-              viewBox="0 0 39 38"
-              fill="none"
-            >
-              <path
-                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
-                fill="#FAB80C"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="39"
-              height="38"
-              viewBox="0 0 39 38"
-              fill="none"
-            >
-              <path
-                d="M19.5 0L24.1025 14.1652H38.9967L26.9471 22.9197L31.5496 37.0848L19.5 28.3303L7.4504 37.0848L12.0529 22.9197L0.00334167 14.1652H14.8975L19.5 0Z"
-                fill="#FAB80C"
-              />
-            </svg>
-            <CountUp
-              from={0}
-              to={43128}
-              separator=","
-              direction="up"
-              duration={2}
-              className="count-up-text text-2xl pl-3"
-            />{" "}
-            <h1 className="text-2xl pl-1">Reviews</h1>
           </div>
           <MenuSection title="Iced Coffee" items={icedCoffee} />
           <MenuSection title="Blended" items={blended} />

@@ -2,13 +2,7 @@ import "../../App.css";
 import { Link } from "react-router-dom";
 
 const logo = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="48"
-    height="52"
-    viewBox="0 0 48 52"
-    fill="none"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="52" viewBox="0 0 48 52" fill="none">
     <path
       d="M19.9213 10.8679L18.1133 10.2413L22.0299 0L35.3208 1.78845L31.4211 10.6895L29.6467 9.98513L32.5895 3.26815L23.3042 2.01944L19.9213 10.8679Z"
       fill="#FFF0D7"
@@ -66,24 +60,9 @@ const logo = (
 
 const Header = () => {
   return (
-    <div className="header-container sticky flex flex-row items-center max-w-lvw min-h-[75px] bg-[#F3B54A]/80 justify-around text-nav-text font-georgia text-lg z-10">
+    <div className="header-container sticky flex flex-row items-center max-w-lvw min-h-[75px] bg-[#2E3F59] justify-around text-nav-text font-georgia text-lg z-10">
       <Link to="/">
         <button className="hover:cursor-pointer">{logo}</button>
-      </Link>
-      <Link to="/Story">
-        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-          OUR STORY
-        </button>
-      </Link>
-      <Link to="/Locations">
-        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-          LOCATIONS
-        </button>
-      </Link>
-      <Link to="/Contact">
-        <button className="hover:underline underline-offset-[6px] decoration-2 hover:text-nav-hover transition-all duration-150 ease-in cursor-pointer">
-          CONTACT
-        </button>
       </Link>
       <Link to="/Menu">
         <button className="min-w-[175px] min-h-[35px] bg-nav-text text-[#D29429] rounded-4xl font-sans hover:text-nav-text hover:bg-order-hover transition-all duration-150 ease-in cursor-pointer">
