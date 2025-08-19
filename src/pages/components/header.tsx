@@ -3,13 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const logo = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="48"
-    height="52"
-    viewBox="0 0 48 52"
-    fill="none"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="52" viewBox="0 0 48 52" fill="none">
     <path
       d="M19.9213 10.8679L18.1133 10.2413L22.0299 0L35.3208 1.78845L31.4211 10.6895L29.6467 9.98513L32.5895 3.26815L23.3042 2.01944L19.9213 10.8679Z"
       fill="#FFF0D7"
@@ -84,13 +78,13 @@ const Header = () => {
               to="/Story"
               className="hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9] transition-all duration-150 ease-in"
             >
-              OUR STORY
+              MENU
             </Link>
             <Link
               to="/Locations"
               className="hover:underline underline-offset-[6px] decoration-2 hover:text-[#4D79A9] transition-all duration-150 ease-in"
             >
-              LOCATIONS
+              MAP
             </Link>
             <Link
               to="/Contact"
@@ -117,12 +111,7 @@ const Header = () => {
             onClick={() => setOpen((v) => !v)}
             className="md:hidden inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1D3D4]"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              className="h-7 w-7"
-              fill="currentColor"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
               {open ? (
                 <path
                   fillRule="evenodd"
@@ -130,12 +119,7 @@ const Header = () => {
                   clipRule="evenodd"
                 />
               ) : (
-                <path
-                  d="M3 6h18M3 12h18M3 18h18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               )}
             </svg>
           </button>
@@ -145,9 +129,7 @@ const Header = () => {
       {/* Mobile slide-down panel */}
       <div
         className={`md:hidden absolute left-0 right-0 top-[72px] origin-top transform bg-[#2E3F59]/95 text-white shadow-md transition-all duration-200 ${
-          open
-            ? "scale-y-100 opacity-100"
-            : "scale-y-0 opacity-0 pointer-events-none"
+          open ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0 pointer-events-none"
         }`}
       >
         <div className="mx-auto max-w-screen-xl px-4 py-4 space-y-2">

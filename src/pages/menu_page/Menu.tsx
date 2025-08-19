@@ -13,11 +13,7 @@ import CountUp from "./menu_components/CountUp";
 
 const Menu = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <div className="bg-repeating-stripes">
         <Header />
         <div className="yellow-overlay">
