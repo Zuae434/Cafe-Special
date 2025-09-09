@@ -13,6 +13,8 @@ import Menu from "./pages/menu_page/Menu.tsx";
 import SignLogin from "./pages/sign-login_page/Sign-Login.tsx";
 import EmptyCart from "./pages/cart_page/Cart.tsx";
 import Dashboard from "./pages/admin-dashboard/Dashboard.tsx";
+import ChefLogin from "./pages/chef_login/ChefLogin.tsx";
+import RequireAuth from "./pages/auth/RequireAuth.tsx";
 import { CartProvider } from "./pages/cart_page/useCart.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,9 +33,17 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/Events" element={<Events />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Menu" element={<Menu />} />
+          <Route path="/ChefLogin" element={<ChefLogin />} />
           <Route path="/Signup" element={<SignLogin />} />
           <Route path="/Cart" element={<EmptyCart />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route
+            path="/Dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
         </Routes>
         <ToastContainer position="top-center" />
       </BrowserRouter>

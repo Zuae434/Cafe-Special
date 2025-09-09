@@ -1,4 +1,5 @@
 import { LocationIcon, ClockIcon, CouponIcon } from "./cartIcons";
+import { AUTH_BASE_URL } from "../../services/auth";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import TipButton from "./TipButton";
@@ -53,7 +54,7 @@ const Checkout = () => {
         qty: item.qty + "",
       }));
 
-      const resp = await fetch("http://127.0.0.1:8000/create-checkout", {
+      const resp = await fetch(`${AUTH_BASE_URL}/create-checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

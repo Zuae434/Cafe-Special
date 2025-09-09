@@ -2,16 +2,37 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../components/header";
 import MenuSection from "./menu_components/MenuSection";
-import {
-  Salads,
-  Entrees,
-  Pizzas,
-  Beverages,
-  pastries,
-} from "./menu_components/MenuData";
+import { Salads, Entrees, Pizzas, Beverages } from "./menu_components/MenuData";
 import CountUp from "./menu_components/CountUp";
+import React, { useEffect, useState } from "react";
+import { listSpecials, type SpecialDto } from "../../services/specials";
 
 const Menu = () => {
+  const [specialItems, setSpecialItems] = useState<
+    { image: string; title: string; subtitle: string; price: string }[]
+  >([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data: SpecialDto[] = await listSpecials();
+        const now = new Date();
+        const items = data
+          .filter((s) => !!s.active)
+          .filter((s) => new Date(s.start_date) <= now)
+          .filter((s) => (s.end_date ? new Date(s.end_date) >= now : true))
+          .map((s) => ({
+            image: s.image_url || "",
+            title: s.name,
+            subtitle: s.description || "",
+            price: (s.price ?? 0).toFixed(2),
+          }));
+        setSpecialItems(items);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       <div className="bg-repeating-stripes">
@@ -122,7 +143,10 @@ const Menu = () => {
             <h1 className="text-lg sm:text-2xl pl-1 text-[#636466]">Reviews</h1>
           </div>
           <div className="px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10 mt-4 sm:mt-8">
-            <MenuSection title="Specials" items={pastries} />
+            <MenuSection title="Specials" items={specialItems} />
+            {specialItems.length === 0 && (
+              <div className="px-4 text-center text-[#636466]">No specials available</div>
+            )}
             <MenuSection title="Salads" items={Salads} />
             <MenuSection title="Entrees" items={Entrees} />
             <MenuSection title="Pizza" items={Pizzas} />

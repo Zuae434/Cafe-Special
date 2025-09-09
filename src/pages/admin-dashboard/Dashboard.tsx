@@ -1,5 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  listSpecials,
+  createSpecial,
+  updateSpecial,
+  deleteSpecial,
+  type SpecialDto,
+} from "../../services/specials";
+import { clearToken } from "../../services/auth";
 
 // ---------------------------------------------
 // Types
@@ -21,23 +30,48 @@ export type Special = {
 };
 
 // ---------------------------------------------
-// Local storage helpers (swap out for API later)
+// API mappers
 // ---------------------------------------------
-const STORAGE_KEY = "cafespecial.specials";
-
-function loadSpecials(): Special[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw) as Special[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
+function dtoToUi(s: SpecialDto): Special {
+  return {
+    id: String(s.id),
+    title: s.name,
+    description: s.description ?? undefined,
+    priceCents: Math.round((s.price ?? 0) * 100),
+    category: normalizeCategory(s.category),
+    imageUrl: s.image_url ?? undefined,
+    isActive: !!s.active,
+    startAt: new Date(s.start_date).toISOString(),
+    endAt: s.end_date ? new Date(s.end_date).toISOString() : undefined,
+    createdAt: nowIso(),
+    updatedAt: nowIso(),
+  };
 }
 
-function saveSpecials(data: Special[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+function formToCreatePayload(f: FormState): Omit<SpecialDto, "id"> {
+  return {
+    name: f.title.trim(),
+    description: f.description.trim() || null,
+    price: Number.parseFloat(f.price || "0") || 0,
+    category: f.category,
+    image_url: f.imageUrl.trim() || null,
+    start_date: new Date(f.startAt).toISOString(),
+    end_date: f.endAt ? new Date(f.endAt).toISOString() : null,
+    active: f.isActive,
+  };
+}
+
+function formToUpdatePayload(f: FormState): Partial<Omit<SpecialDto, "id">> {
+  return {
+    name: f.title.trim(),
+    description: f.description.trim() || null,
+    price: Number.parseFloat(f.price || "0") || 0,
+    category: f.category,
+    image_url: f.imageUrl.trim() || null,
+    start_date: new Date(f.startAt).toISOString(),
+    end_date: f.endAt ? new Date(f.endAt).toISOString() : null,
+    active: f.isActive,
+  };
 }
 
 // ---------------------------------------------
@@ -55,6 +89,20 @@ function fromCents(cents: number) {
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+function normalizeCategory(cat: string | undefined | null): SpecialCategory {
+  const c = (cat || "").toString().toLowerCase();
+  return c === "student" ? "student" : "cafe";
+}
+
+async function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 function computeStatus(s: Special, now = new Date()) {
@@ -97,6 +145,7 @@ type FormState = {
 // Dashboard Component
 // ---------------------------------------------
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   // Tabs & data
   const [tab, setTab] = useState<SpecialCategory>("student");
   const [specials, setSpecials] = useState<Special[]>([]);
@@ -112,7 +161,15 @@ const Dashboard: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    setSpecials(loadSpecials());
+    (async () => {
+      try {
+        const data = await listSpecials();
+        setSpecials(data.map(dtoToUi));
+      } catch (e) {
+        console.error(e);
+        toast.error("Failed to load specials");
+      }
+    })();
   }, []);
 
   // When changing tabs, reset form category
@@ -133,33 +190,32 @@ const Dashboard: React.FC = () => {
   }, [specials, tab, statusFilter]);
 
   // CRUD ops
-  const upsert = (data: FormState) => {
-    const id = data.id || `${Date.now()}`;
-    const item: Special = {
-      id,
-      title: data.title.trim(),
-      description: data.description.trim() || undefined,
-      priceCents: toCents(data.price),
-      category: data.category,
-      imageUrl: data.imageUrl.trim() || undefined,
-      isActive: data.isActive,
-      startAt: new Date(data.startAt).toISOString(),
-      endAt: data.endAt ? new Date(data.endAt).toISOString() : undefined,
-      createdAt: data.id
-        ? specials.find((s) => s.id === id)?.createdAt ?? nowIso()
-        : nowIso(),
-      updatedAt: nowIso(),
-    };
-
-    setSpecials((prev) => {
-      const exists = prev.some((s) => s.id === id);
-      const next = exists
-        ? prev.map((s) => (s.id === id ? item : s))
-        : [item, ...prev];
-      saveSpecials(next);
-      return next;
-    });
-    toast.success(`Special ${data.id ? "updated" : "created"}`);
+  const upsert = async (data: FormState): Promise<boolean> => {
+    try {
+      if (data.id) {
+        await updateSpecial(Number(data.id), formToUpdatePayload(data));
+        const refreshed = await listSpecials();
+        setSpecials(refreshed.map(dtoToUi));
+        toast.success("Special updated");
+      } else {
+        await createSpecial(formToCreatePayload(data));
+        const refreshed = await listSpecials();
+        setSpecials(refreshed.map(dtoToUi));
+        toast.success("Special created");
+      }
+      return true;
+    } catch (e) {
+      console.error(e);
+      const msg = (e as any)?.message?.toString?.() || "";
+      if (msg.includes("401") || msg.toLowerCase().includes("unauthorized")) {
+        clearToken();
+        toast.error("Session expired. Please log in again.");
+        navigate("/ChefLogin", { replace: true });
+      } else {
+        toast.error(data.id ? "Failed to update" : "Failed to create");
+      }
+      return false;
+    }
   };
 
   const onEdit = (s: Special) => {
@@ -178,13 +234,22 @@ const Dashboard: React.FC = () => {
     setIsOpen(true);
   };
 
-  const onDelete = (id: string) => {
-    setSpecials((prev) => {
-      const next = prev.filter((s) => s.id !== id);
-      saveSpecials(next);
-      return next;
-    });
-    toast.info("Special deleted");
+  const onDelete = async (id: string) => {
+    try {
+      await deleteSpecial(Number(id));
+      setSpecials((prev) => prev.filter((s) => s.id !== id));
+      toast.info("Special deleted");
+    } catch (e) {
+      console.error(e);
+      const msg = (e as any)?.message?.toString?.() || "";
+      if (msg.includes("401") || msg.toLowerCase().includes("unauthorized")) {
+        clearToken();
+        toast.error("Session expired. Please log in again.");
+        navigate("/ChefLogin", { replace: true });
+      } else {
+        toast.error("Failed to delete special");
+      }
+    }
   };
 
   const onDuplicate = (s: Special) => {
@@ -239,6 +304,21 @@ const Dashboard: React.FC = () => {
             }`}
           >
             Cafe Specials
+          </button>
+          <Link to="/Menu" className="ml-1">
+            <button className="px-4 py-2 rounded-md text-sm font-semibold border border-[#D1D3D4] text-[#2E3F59] hover:bg-[#e6edf5]">
+              ← Back to Menu
+            </button>
+          </Link>
+          <button
+            onClick={() => {
+              clearToken();
+              toast.info("Logged out");
+              navigate("/ChefLogin", { replace: true });
+            }}
+            className="px-4 py-2 rounded-md text-sm font-semibold border border-[#D1D3D4] text-[#2E3F59] hover:bg-[#e6edf5]"
+          >
+            Logout
           </button>
         </div>
       </div>
@@ -462,6 +542,41 @@ const Dashboard: React.FC = () => {
                 />
               </label>
 
+              <label className="block">
+                <span className="text-sm text-[#2E3F59] font-semibold">
+                  Or Upload Image
+                </span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    try {
+                      const dataUrl = await fileToDataUrl(file);
+                      setForm((f) => ({ ...f, imageUrl: dataUrl }));
+                      toast.info("Image loaded from file");
+                    } catch (err) {
+                      console.error(err);
+                      toast.error("Failed to read image file");
+                    }
+                  }}
+                  className="mt-1 block w-full text-sm text-[#2E3F59]"
+                />
+                <p className="mt-1 text-xs text-[#636466]">
+                  The image will be sent as a data URL string.
+                </p>
+                {form.imageUrl && (
+                  <div className="mt-2">
+                    <img
+                      src={form.imageUrl}
+                      alt="Preview"
+                      className="w-full h-40 object-cover rounded-md border border-[#D1D3D4]"
+                    />
+                  </div>
+                )}
+              </label>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <label className="block">
                   <span className="text-sm text-[#2E3F59] font-semibold">
@@ -514,10 +629,12 @@ const Dashboard: React.FC = () => {
                 </button>
                 <button
                   disabled={!canSave}
-                  onClick={() => {
-                    upsert(form);
-                    setIsOpen(false);
-                    resetForm();
+                  onClick={async () => {
+                    const ok = await upsert(form);
+                    if (ok) {
+                      setIsOpen(false);
+                      resetForm();
+                    }
                   }}
                   className="px-4 py-2 rounded-md bg-[#4D79A9] text-white font-semibold disabled:opacity-50 hover:bg-[#2E3F59]"
                 >
